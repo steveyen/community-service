@@ -9,6 +9,7 @@ RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
+require File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot')
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
@@ -30,6 +31,9 @@ Rails::Initializer.run do |config|
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
+
+  config.plugins = [:engines, :community_engine, :white_list, :all]
+  config.plugin_paths += ["#{RAILS_ROOT}/vendor/plugins/community_engine/engine_plugins"]
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
@@ -64,4 +68,12 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
+
+  config.load_paths += Dir["#{RAILS_ROOT}/vendor/gems/**"].map do |dir|
+    File.directory?(lib = "#{dir}/lib") ? lib : dir
+  end
 end
+
+require "#{RAILS_ROOT}/vendor/plugins/community_engine/engine_config/boot.rb"
+
+

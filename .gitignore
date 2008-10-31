@@ -1,0 +1,9 @@
+**~
+log/*.log
+db/*
+public/**.html
+public/about
+public/stylesheets/*.css
+tmp/*
+
+
