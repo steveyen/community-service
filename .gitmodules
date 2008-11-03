@@ -1,0 +1,6 @@
+[submodule "vendor/plugins/engines"]
+	path = vendor/plugins/engines
+	url = git://github.com/steveyen/engines.git
+[submodule "vendor/plugins/community_engine"]
+	path = vendor/plugins/community_engine
+	url = git://github.com/steveyen/community-engine.git
